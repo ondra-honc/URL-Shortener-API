@@ -4,6 +4,7 @@ import java.sql.DriverManager
 import java.sql.Connection
 import java.sql.PreparedStatement
 import java.sql.ResultSet
+import java.sql.SQLException
 
 
 object DB {
@@ -29,6 +30,18 @@ object DB {
     }
 
     private fun executeUpdate(sql: String, vararg params: String): Boolean {
-        return false
+        try {
+            DriverManager.getConnection("jdbc:sqlite:shortener.db").use { connection ->
+                connection.prepareStatement(sql).use { statement ->
+                    params.forEachIndexed { index, param ->
+                        statement.setString(index + 1, param)
+                    }
+
+                    return statement.executeUpdate() > 0
+                }
+            }
+        } catch (e: SQLException) {
+            return false
+        }
     }
 } 
