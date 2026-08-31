@@ -41,5 +41,5 @@ bin/
 ### Mac OS ###
 .DS_Store
 
-### DB Tests ###
+### DB Testing ###
 shortener.db
