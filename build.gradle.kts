@@ -11,6 +11,7 @@ repositories {
 
 dependencies {
     testImplementation(kotlin("test"))
+    implementation("org.xerial:sqlite-jdbc:3.53.4.0")
 }
 
 kotlin {
